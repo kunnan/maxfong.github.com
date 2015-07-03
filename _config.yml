@@ -1,7 +1,7 @@
 # Site settings
-title: maxfong's Homepage
+title: maxfong的博客
 email: devmaxfong@qq.com
-description: blog
+description: 多学、多思
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://maxfong.xyz" # the base hostname & protocol for your site
 twitter_username: maxfongDev
