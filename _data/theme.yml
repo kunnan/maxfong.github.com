@@ -1,0 +1,31 @@
+# Theme customization - please change from the defaults!
+
+# Color for top bar, links, etc
+highlight_color: '#319AD7'
+
+# Profile links on the left sidebar, leave blank to ignore
+social:
+  github: maxfong
+  weibo: 51843210
+  email: devmaxfong@qq.com
+  #bitbucket: maxfong
+  # hacker_news: maxfong
+  #stackexchange: maxfong
+  #stackoverflow: maxfong
+  # twitter: maxfongDev
+  #facebook: maxfong
+  #tumblr: maxfong
+  #linkedin: maxfong
+  #gplus: maxfong
+  gravatar: 35f2dd12f762a45a2e85d4096a9b11f2
+
+# "Hi, I'm _______"
+name: maxfong
+email: devmaxfong@qq.com
+tagline: "多学，多思"
+
+# Google Analytics key, leave blank to ignore
+# google_analytics_key: UA-xxxx-x
+
+# Toggle "Postings are my own" disclaimer in footer
+show_disclaimer: true

@@ -1,11 +1,5 @@
-# Site settings
-title: maxfong的博客
-email: devmaxfong@qq.com
-description: 多学、多思
-baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://maxfong.xyz" # the base hostname & protocol for your site
-twitter_username: maxfongDev
-github_username:  maxfong
-
-# Build settings
-markdown: kramdown
+# General Jekyll Config
+highlighter: pygments
+url: http://imfong.com
+lsi: false
+exclude: [LICENSE, CNAME, README.md, .gitignore, Gemfile, Gemfile.lock]

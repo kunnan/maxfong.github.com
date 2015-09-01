@@ -1,0 +1,17 @@
+<nav>
+  <p></p>
+  <a href="/">
+    {% if site.data.theme.social.gravatar %}
+    <img src="http://www.gravatar.com/avatar/{{ site.data.theme.social.gravatar }}?s=120" id="gravatar" alt="My photo"/>
+    {% else %}
+    <img src="/logo.png" id="logo" alt="Blog logo"/>
+    {% endif %}
+  </a>
+  <h1><a style="text-decoration:none;" href="/">{{ site.data.theme.name }}</a></h1>
+  <div id="bio">
+    <p>热爱编程、完成事情、持续重构代码、使用设计模式、编写测试、善用现有代码、专注可用性、编写可维护的代码</p>
+  </div>
+  <div id="social">
+    {% include social.html %}
+  </div>
+</nav>
