@@ -152,8 +152,6 @@ nav h1, nav h2 {
 
 .sidebar {
   padding-top: 25px;
-  padding-left: 50px;
-  padding-right: 50px;
   font-family: "open sans", sans-serif;
 }
 
@@ -170,9 +168,6 @@ nav h1, nav h2 {
   border-left: 1px solid #DDD;
   padding-top: 40px;
   min-height: 400px;
-  padding-right: 80px;
-  padding-bottom: 1ex;
-  padding-left: 80px;
 }
 
 .footer {

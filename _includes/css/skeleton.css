@@ -21,7 +21,7 @@
 /* #Base 960 Grid
 ================================================== */
 
-    .container                                  { position: relative; width: 100%; margin: 0 auto; padding: 0; }
+    .container                                  { position: relative; width: 100%; margin: 0 0; padding: 0; }
     .column, .columns                           { float: left; display: inline; margin-left: 10px; margin-right: 10px; }
     .row                                        { margin-bottom: 20px; }
 
@@ -71,11 +71,14 @@
 
 /* #Tablet (Portrait)
 ================================================== */
-
+    @media only screen and (min-width: 959px) {
+        .mfsauto                                    {  width: calc(100% - 500px);  }
+    }
     /* Note: Design for a width of 768px */
 
     @media only screen and (min-width: 768px) and (max-width: 959px) {
-        .container                                  { width: 768px; }
+        .mfsauto                                    { width: calc(100% - 452px); }
+        .container                                  { width: 100%; }
         .container .column,
         .container .columns                         { margin-left: 10px; margin-right: 10px;  }
         .column.alpha, .columns.alpha               { margin-left: 0; margin-right: 10px; }
@@ -126,7 +129,8 @@
     /* Note: Design for a width of 320px */
 
     @media only screen and (max-width: 767px) {
-        .container { width: 300px; }
+        .container { width: 100%; }
+        .mfsauto   { width: 100%; }
         .columns, .column { margin: 0; }
 
         .container .one.column,
@@ -174,7 +178,7 @@
     /* Note: Design for a width of 480px */
 
     @media only screen and (min-width: 480px) and (max-width: 767px) {
-        .container { width: 420px; }
+        .container { width: calc(100% - 150px); }
         .columns, .column { margin: 0; }
 
         .container .one.column,
@@ -195,6 +199,11 @@
         .container .sixteen.columns,
         .container .one-third.column,
         .container .two-thirds.column { width: 420px; }
+    }
+
+    @media only screen and (max-width: 479px) {
+        .container { width: calc(100% - 150px); }
+        .columns, .column { margin: 0; }
     }
 
 
