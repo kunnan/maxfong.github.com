@@ -2,7 +2,7 @@
 layout: post
 title:  "一个神奇的BUG"
 date:   2015-08-10 19:20:56
-categories: jekyll update
+categories: iOS
 ---
 临近发布，Xcode打出的包在不同的设备效果不同，对比下来发现一些情况  
 

@@ -1,0 +1,35 @@
+.socialitem {
+	margin:0px 12px 0px 12px; 
+}
+
+.excerpt {
+    margin: 0;
+    font-size: .9em;
+    color: #888;
+}
+
+p {
+    margin-bottom: 1.3em;
+    line-height: 1.7em;
+}
+
+title {
+    margin-top: 0;
+    margin-bottom: .2em;
+    font-size: 1.5em;
+    line-height: 1.3em;
+}
+
+.by-line-time {
+	display: block;
+    margin: .7em 0 0 0;
+    font-size: .9em;
+    color: #c7c7c7;
+}
+
+.post-list__divider {
+    width: 30%;
+    margin: 2.0em 0 2.0em 0;
+    border-top: 1px solid #DDDDDD;
+}
+

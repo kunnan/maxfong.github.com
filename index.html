@@ -4,15 +4,34 @@ title: Blog Posts
 ---
 
 <div id="home">
-  <h2><i class="fa fa-bookmark"></i> Blog Posts</h2>
   <ul id="blog-posts" class="posts">
-    {% for post in site.posts %}
-    <li class="post">
-	  	<h2><a href="{% if site.baseurl == "/" %}{{ post.url }}{% else %}{{ post.url | prepend: site.baseurl }}{% endif %}">{{ post.title }}</a></h2>
-	  	<time datetime="{{ post.date | date_to_xmlschema }}" class="by-line">{{ post.date | date_to_string }}</time>
-	  	<p>{{ post.content | strip_html | truncatewords:5 }}</p>
-	  </li>
-      <!-- <li><span>{{ post.date | date_to_string }} &raquo;</span><a href="{{ post.url }}">{{ post.title }}</a></li> -->
-    {% endfor %}
+
+<!-- This loops through the paginated posts -->
+{% for post in paginator.posts %}
+  <li class="post">
+      <h2><a href="{% if site.baseurl == "/" %}{{ post.url }}{% else %}{{ post.url | prepend: site.baseurl }}{% endif %}">{{ post.title }}</a></h2>
+      <p class="excerpt">{{ post.content | strip_html | truncatewords:5 }}</p>
+    </li>
+    <div class="post-list__meta">
+    <time datetime="{{ post.date | date_to_xmlschema }}" class="by-line-time">{{ post.date | date_to_string }}</time>
+    </div>
+    <hr class="post-list__divider">
+{% endfor %}
+
+<!-- Pagination links -->
+<div class="pagination">
+  {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path }}" class="previous">Previous </a>
+  {% else %}
+    <span class="previous">Previous</span>
+  {% endif %}
+  <span class="page_number "> {{ paginator.page }}/{{ paginator.total_pages }}</span>
+  {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path }}" class="next"> Next</a>
+  {% else %}
+    <span class="next ">Next</span>
+  {% endif %}
+</div>
+
   </ul>
 </div>

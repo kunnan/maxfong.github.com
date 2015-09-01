@@ -24,6 +24,9 @@ h1, h2, h3, h4, h5, h6 {
 
 h1.title {
   font-weight: 800;
+  font-size: 35px;
+  font-size: 28px;
+  color: #333;
 }
 
 h1 {
@@ -127,6 +130,10 @@ nav h1, nav h2 {
   margin-bottom: 20px !important;
 }
 
+#post p {
+  color: rgb(102, 102, 102);
+}
+
 #post ul,
 #post ol {
   margin-left: 1.35em;
@@ -134,7 +141,7 @@ nav h1, nav h2 {
 
 #post code {
   border: 1px solid #ddd;
-  background-color: #eef;
+  background-color: #eee;
   font-size: 85%;
   padding: 0 .2em;
 }
@@ -145,6 +152,8 @@ nav h1, nav h2 {
 
 .sidebar {
   padding-top: 25px;
+  padding-left: 50px;
+  padding-right: 50px;
   font-family: "open sans", sans-serif;
 }
 
@@ -157,11 +166,13 @@ nav h1, nav h2 {
 }
 
 .content {
-  font: 400 16px/22px "open sans", sans-serif;
+  /*font: 400 16px/22px "open sans", sans-serif;*/
   border-left: 1px solid #DDD;
-  padding-left: 40px;
-  padding-top: 25px;
+  padding-top: 40px;
   min-height: 400px;
+  padding-right: 80px;
+  padding-bottom: 1ex;
+  padding-left: 80px;
 }
 
 .footer {
