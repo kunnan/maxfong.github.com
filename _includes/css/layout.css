@@ -7,6 +7,12 @@
 * 8/17/2011
 */
 
+@media only screen and (min-width: 959px) {
+	.content {
+		padding-bottom: 1ex;
+		padding-left: 80px; }
+}
+
 /* Smaller than standard 960 (devices and browsers) */
 @media only screen and (max-width: 959px) {
 	#logo {
@@ -14,6 +20,9 @@
 		margin-bottom: 15px; }
 	nav .button {
 		padding: 9px 20px 11px; }
+	.content {
+		padding-bottom: 1ex;
+		padding-left: 80px; }
 }
 
 /* Tablet Portrait size to standard 960 (devices and browsers) */
@@ -21,12 +30,13 @@
 	nav {
 		width: 160px; }
 	.sidebar h2 {
-		font-size: 18px;
-	}
+		font-size: 18px; }
 
 	#bio {
-		font-size: 14px;
-	}
+		font-size: 14px; }
+	.content {
+		padding-bottom: 1ex;
+		padding-left: 80px; }
 }
 
 /* All Mobile Sizes (devices and browser) */
@@ -38,10 +48,10 @@
 	.sidebar {
 		display: none;
 	}
-	.content {
-		border: 0px;
-		padding-left: 0px;
-	}
+	/*.content {
+		padding-bottom: 1ex;
+		padding-left: 20px;
+	}*/
 }
 
 /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
@@ -53,6 +63,10 @@
 	h1 {
 		font-size: 28px;
 		line-height: 36px;
+	}
+	.content {
+		padding-bottom: 1ex;
+		padding-left: 40px;
 	}
 }
 
@@ -70,5 +84,9 @@
 	h2 {
 		font-size: 22px;
 		line-height: 24px;
+	}
+	.content {
+		padding-bottom: 1ex;
+		padding-left: 20px;
 	}
 }

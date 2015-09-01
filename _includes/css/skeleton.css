@@ -130,7 +130,7 @@
 
     @media only screen and (max-width: 767px) {
         .container { width: 100%; }
-        .mfsauto   { width: 100%; }
+        .mfsauto   { width: calc(100% - 5px); }
         .columns, .column { margin: 0; }
 
         .container .one.column,
@@ -178,7 +178,8 @@
     /* Note: Design for a width of 480px */
 
     @media only screen and (min-width: 480px) and (max-width: 767px) {
-        .container { width: calc(100% - 150px); }
+        .container { width: 100%; }
+        .mfsauto   { width: calc(100% - 80px); }
         .columns, .column { margin: 0; }
 
         .container .one.column,
@@ -202,7 +203,7 @@
     }
 
     @media only screen and (max-width: 479px) {
-        .container { width: calc(100% - 150px); }
+        .container { width: calc(100% - 40px); }
         .columns, .column { margin: 0; }
     }
 
