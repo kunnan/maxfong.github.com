@@ -33,3 +33,7 @@ title {
     border-top: 1px solid #DDDDDD;
 }
 
+.container .mfsauto.columns {
+    width: 50%;
+}
+
