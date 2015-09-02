@@ -6,4 +6,5 @@
 {% include css/layout.css %}
 {% include css/syntax.css %}
 {% include css/mfs.css %}
-{% include css/pace-theme-barber-shop.css %}
+{% include css/extend/pace-theme-barber-shop.css %}
+{% include css/extend/font-awesome.min.css %}
