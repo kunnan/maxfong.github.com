@@ -34,7 +34,11 @@ title {
 }
 
 .sidebar {
-  padding-left: 30px;
-  padding-right: 30px;
+  padding-left: 3%;
+  padding-right: 3%;
 }
 
+.content {
+    padding-bottom: 1ex;
+    padding-left: 5%; 
+}
