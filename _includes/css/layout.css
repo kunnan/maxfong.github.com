@@ -10,7 +10,7 @@
 @media only screen and (min-width: 959px) {
 	.content {
 		padding-bottom: 1ex;
-		padding-left: 80px; }
+		padding-left: 60px; }
 }
 
 /* Smaller than standard 960 (devices and browsers) */
@@ -22,7 +22,7 @@
 		padding: 9px 20px 11px; }
 	.content {
 		padding-bottom: 1ex;
-		padding-left: 80px; }
+		padding-left: 60px; }
 }
 
 /* Tablet Portrait size to standard 960 (devices and browsers) */
@@ -36,7 +36,7 @@
 		font-size: 14px; }
 	.content {
 		padding-bottom: 1ex;
-		padding-left: 80px; }
+		padding-left: 60px; }
 }
 
 /* All Mobile Sizes (devices and browser) */
@@ -87,6 +87,6 @@
 	}
 	.content {
 		padding-bottom: 1ex;
-		padding-left: 20px;
+		padding-left: 30px;
 	}
 }
