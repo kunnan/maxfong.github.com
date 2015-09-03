@@ -204,26 +204,8 @@ nav h1, nav h2 {
   border-style: double;
 }
 
-#stalker {
-  display: inline-block;
-  height: 18px;
-  margin-left: 5px;
-}
-
-#stalker a {
-  width: 29px;
-  overflow: hidden;
-  float: left;
-}
-
 #stalker i {
   font-size: 28px;
-  margin-right: 5px;
-}
-
-#stalker a:hover {
-  text-decoration: none;
-  color: {{ site.data.theme.highlight_color }};
 }
 
 i.fa-hn {

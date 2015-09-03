@@ -9,12 +9,20 @@
 
 @media only screen and (min-width: 1103px) {
 	.mfsauto {
-		width: 65%;  }
+		width: calc(84% - 221px);  }
+	#stalker {
+    	width: 220px; }
+    #stalker i {
+    	width: 55px; }
 }
 
 @media only screen and (max-width: 1103px) {
 	.mfsauto {
-		width: 60%;  }
+		width: calc(84% - 221px);  }
+	#stalker {
+    	width: 220px; }
+    #stalker i {
+    	width: 55px; }
 }
 
 /* Smaller than standard 960 (devices and browsers) */
@@ -22,6 +30,10 @@
 	#logo {
 		font-size: 21px;
 		margin-bottom: 15px; }
+	#stalker {
+    	width: 220px; }
+    #stalker i {
+    	width: 55px; }
 	nav .button {
 		padding: 9px 20px 11px; }
 }
@@ -32,8 +44,12 @@
 		width: 160px; }
 	#bio {
 		font-size: 14px; }
+	#stalker {
+    	width: 172px; }
+    #stalker i {
+    	width: 43px; }
 	.mfsauto { 
-		width: 60%; }
+		width: calc(84% - 173px);  }
 }
 
 /* All Mobile Sizes (devices and browser) */
@@ -45,8 +61,12 @@
 	.sidebar {
 		display: none;
 	}
+	#stalker {
+    	width: 172px; }
+    #stalker i {
+    	width: 43px; }
 	.mfsauto { 
-		width: 60%; }
+		width: 90%;  }
 }
 
 /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
@@ -58,6 +78,10 @@
 		font-size: 28px;
 		line-height: 36px;
 	}
+	#stalker {
+    	width: 172px; }
+    #stalker i {
+    	width: 43px; }
 	.mfsauto { 
 		width: 90%; }
 }
@@ -67,15 +91,16 @@
 	.sidebar {
 		display: none;
 	}
+	#stalker {
+    	width: 172px; }
+    #stalker i {
+    	width: 43px; }
 	.mfsauto { 
-		width: 105%; }
+		width: 90%; }
 	h1 {
 		font-size: 24px;
-		line-height: 32px;
-	}
-
+		line-height: 32px; }
 	h2 {
 		font-size: 22px;
-		line-height: 24px;
-	}
+		line-height: 24px; }
 }

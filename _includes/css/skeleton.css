@@ -197,7 +197,7 @@
     }
 
     @media only screen and (max-width: 479px) {
-        .container { width: calc(100% - 60px); }
+        .container { width: 100%; }
         .columns, .column { margin: 0; }
     }
 

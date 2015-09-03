@@ -1,11 +1,31 @@
 .socialitem {
-	margin:0px 12px 0px 12px; 
+    /*margin-left:2%;*/
+    /*margin-top: 0px;
+    margin-bottom: 0px;*/
+    margin: auto auto; 
+    list-style-type: none;
+    /*margin-right: 5px;*/
+    float: left;
+    /*text-align: center;*/
+    display: inline;
+    width: 55px;
+}
+.socialitem a {
+    width: 55px;
+    text-align: center;
 }
 
 .excerpt {
     margin: 0;
     font-size: .9em;
     color: #888;
+}
+
+.excerptL {
+    margin: 0;
+    font-size: .9em;
+    color: #888;
+    text-align: center;
 }
 
 p {
@@ -40,5 +60,6 @@ title {
 
 .content {
     padding-bottom: 1ex;
-    padding-left: 5%; 
+    padding-left: 5%;
+    padding-right: 5%; 
 }
