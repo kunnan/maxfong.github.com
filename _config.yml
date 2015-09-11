@@ -3,5 +3,5 @@ highlighter: pygments
 url: http://imfong.com
 lsi: false
 exclude: [LICENSE, CNAME, README.md, .gitignore, Gemfile, Gemfile.lock]
-paginate: 5
+paginate: 20
 paginate_path: "page:num"

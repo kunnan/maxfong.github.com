@@ -18,14 +18,13 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   color: #181818;
-  font-family: "open sans", sans-serif;
+  /*font-family: "open sans", sans-serif;*/
   font-weight: 600;
 }
 
 h1.title {
   font-weight: 800;
   font-size: 35px;
-  font-size: 28px;
   color: #333;
 }
 

@@ -31,6 +31,7 @@ published: true
 3. 数据安全存储
 4. 不同的等级
 5. 尽可能多的数据类型
+6. 效率更快，最好是键值对关系
 
 #开工
 
@@ -202,7 +203,7 @@ published: true
 每个客户端都需要保存一些全局数据，一般的做法是创建一个单例对象来保存，`GlobalManager`就是这个作用；  
 
 #后续
-本篇其实不是设计Cache，而是介绍了本人写的CachaManager作用有哪些；  
+本篇是本人已经设计出的一种Cache方式并具体介绍它已有哪些功能，可能有所欠缺，抛砖引玉；  
 `CacheManager`和`GlobalManager`包含的功能基本上满足了一个App的数据缓存系统，比如用户信息，可根据UserID设置suiteName，每个用户账号都有不同的数据空间，而最好不要对用户信息使用单例存储；  
 
 MFSCache源码请访问[Github](https://github.com/maxfong/MFSCache)，感谢你提出更好的建议；    
