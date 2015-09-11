@@ -40,6 +40,10 @@ title {
     line-height: 1.3em;
 }
 
+#post ol li {
+    color: rgb(102, 102, 102);
+}
+
 .by-line-time {
 	display: block;
     margin: .7em 0 0 0;

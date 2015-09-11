@@ -141,8 +141,9 @@ nav h1, nav h2 {
 #post code {
   border: 1px solid #ddd;
   background-color: #eee;
-  font-size: 85%;
-  padding: 0 .2em;
+  font-size: 80%;
+  padding: 0.2em;
+  color: #4d4d4c;
 }
 
 #post pre code {
