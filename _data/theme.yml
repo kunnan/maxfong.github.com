@@ -30,5 +30,9 @@ tagline: "多学，多思"
 # Baidu Analytics key
 baidutongji: 5ed655a78414b07b9ec8bfaa15d9961f
 
+# duoshuo
+duoshuo : 
+  short_name : imfong
+
 # Toggle "Postings are my own" disclaimer in footer
 show_disclaimer: true
