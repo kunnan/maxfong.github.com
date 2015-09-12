@@ -5,3 +5,4 @@ lsi: false
 exclude: [LICENSE, CNAME, README.md, .gitignore, Gemfile, Gemfile.lock]
 paginate: 20
 paginate_path: "page:num"
+permalink: /post/:title
