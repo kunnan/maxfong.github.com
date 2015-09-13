@@ -93,8 +93,6 @@ published: true
 	
 	+ (instancetype)defaultStorage;
 	
-	/** MFSFileStorageType默认为MFSFileStorageArchiver */
-	- (void)setObject:(MFSFileStorageObject *)aObject forKey:(NSString *)aKey;
 	- (void)setObject:(MFSFileStorageObject *)aObject forKey:(NSString *)aKey type:(MFSFileStorageType)t;
 	
 	- (MFSFileStorageObject *)objectForKey:(NSString *)aKey;
@@ -152,9 +150,8 @@ published: true
 	/** 存储的对象的存在时间，duration默认为0，传-1，表示永久存在，不可被清理，只能手动移除或覆盖移除 
 	 *  @param duration 存储时间，单位:秒 */
 	- (void)setObject:(id)aObject forKey:(NSString *)aKey duration:(NSTimeInterval)duration;
-	
-	/** 存储全局临时对象，不序列化，不占用硬盘空间 */
-	- (void)setGlobalObject:(id)aObject forKey:(NSString *)aKey;
+	/** 存储全局临时对象，toDisk为NO则不占用硬盘空间 */
+	- (void)setObject:(id)aObject forKey:(NSString *)aKey toDisk:(BOOL)toDisk;
 	
 	/** 根据Key获取对象(数据相同内存值不同) */
 	- (id)objectForKey:(NSString *)aKey;
@@ -181,7 +178,7 @@ published: true
 1. 开放`+defaultManager`供普通数据存储，可被全局清理；  
 2. 需要存储不同空间的，`CacheManager`使用`-initWithSuiteName:`初始化；  
 3. `-setObject:forKey:duration:`通过`duration`来控制数据的有效时间，单位是秒，如果传入负数，说明数据永久，只能通过Key使用`-removeObjectForKey:`移除，`-removeObjectsWithCompletionBlock:`无法移除；  
-4. 使用`-setGlobalObject:forKey:`的对象不进行文件存储，只存在内存中，他和GlobalManager的区别在于是否需要经过`FileStorageObject`转换；  
+4. 使用`-setObject:forKey:toDisk:`存储的对象可不进行文件存储，只存在内存中，他和GlobalManager的区别在于是否需要经过`FileStorageObject`转换，每次获取的都是新对象，修改对原缓存对象无影响；  
 
 ###GlobalManager
 
@@ -200,7 +197,7 @@ published: true
 	
 	@end	
 
-每个客户端都需要保存一些全局数据，一般的做法是创建一个单例对象来保存，`GlobalManager`就是这个作用；  
+每个客户端都需要保存一些全局数据，一般的做法是创建一个单例对象来保存，`GlobalManager`就是这个作用，因为单纯的存储在内存中，一处修改，其他地方取值也会变化；  
 
 #后续
 本篇是本人已经设计出的一种Cache方式并具体介绍它已有哪些功能，可能有所欠缺，抛砖引玉；  
