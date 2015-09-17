@@ -13,7 +13,12 @@ title: Blog Posts
       <p class="excerpt">{{ post.content | strip_html | truncatewords:5 }}</p>
     </li>
     <div class="post-list__meta">
-    <time datetime="{{ post.date | date_to_xmlschema }}" class="by-line-time">{{ post.date | date_to_string }}</time>
+    <time datetime="{{ post.date | date_to_xmlschema }}" class="by-line-time">{{ post.date | date_to_string }}</time>&nbsp;
+    <span class="post-list__meta_cat"> • 于
+    {% for category in post.categories %}
+      <a href="/category/{{ category }}.html">{{ category }}</a>
+    {% endfor %}  
+    </span>
     </div>
     <hr class="post-list__divider">
 {% endfor %}
