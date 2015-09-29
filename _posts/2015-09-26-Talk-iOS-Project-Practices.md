@@ -3,7 +3,7 @@ layout: post
 title:  "谈谈iOS多工程依赖"
 date:   2015-09-26 00:00:00
 categories: iOS
-published: false
+published: true
 ---
 
 >分享自己处理多个工程之间依赖的方案。
@@ -21,7 +21,7 @@ published: false
 
 #常用依赖方式
 
-多个工程依赖方式我了解3种，2种是有Git本身支持，还有一种需要使用流行的cocoaPods：
+多个工程依赖方式我了解3种，2种是有Git本身支持，还有一种是使用cocoaPods：
 
 1. git submodule
 2. git subtree
@@ -39,7 +39,8 @@ published: false
 
 缺点是主仓库不仅依赖子模块的代码，还依赖子模块的git提交，每次子模块更新后，需要在主仓库做一次提交，内容就是个`commitid`。  
 
-如果是操作命令行，每次提交需要注意先更新子模块，提交子模块，然后才是主仓库。  
+如果是操作命令行，每次提交需要注意先更新子模块，提交子模块，然后才是主仓库。 
+ 
 `SourceTree`是个不错的Git图形化工具，项目中有子模块，他会根据`.gitmodules`检测到子模块并提示先操作子模块仓库，比较方便而且不容易出错。  
 
 主仓库更新所有的子模块: `git submodule foreach git pull`
@@ -69,35 +70,6 @@ iOS开发中，我们经常自己写并且使用在了项目中的就是静态�
 2. 选择Cocoa Touch Framework，输入库名称并创建
 3. 在Build Settings，搜索 mach
 4. 将Mach-O Type修改成Static Library
-
-####真机&模拟器联合脚本  
-
-	# Sets the target folders and the final framework product.
-	# 如果工程名称和Framework的Target名称不一样的话，要自定义FMKNAME
-	# 例如: FMK_NAME = "MyFramework"
-	FMK_NAME=${PROJECT_NAME}
-	# Install dir will be the final output to the framework.
-	# The following line create it in the root folder of the current project.
-	INSTALL_DIR=${SRCROOT}/Products/${FMK_NAME}.framework
-	# Working dir will be deleted after the framework creation.
-	WRK_DIR=build
-	DEVICE_DIR=${WRK_DIR}/Release-iphoneos/${FMK_NAME}.framework
-	SIMULATOR_DIR=${WRK_DIR}/Release-iphonesimulator/${FMK_NAME}.framework
-	# -configuration ${CONFIGURATION}
-	# Clean and Building both architectures.
-	xcodebuild -configuration "Release" -target "${FMK_NAME}" -sdk iphoneos clean build
-	xcodebuild -configuration "Release" -target "${FMK_NAME}" -sdk iphonesimulator clean build
-	# Cleaning the oldest.
-	if [ -d "${INSTALL_DIR}" ]
-	then
-	rm -rf "${INSTALL_DIR}"
-	fi
-	mkdir -p "${INSTALL_DIR}"
-	cp -R "${DEVICE_DIR}/" "${INSTALL_DIR}/"
-	# Uses the Lipo Tool to merge both binary files (i386 + armv6/armv7) into one Universal final product.
-	lipo -create "${DEVICE_DIR}/${FMK_NAME}" "${SIMULATOR_DIR}/${FMK_NAME}" -output "${INSTALL_DIR}/${FMK_NAME}"
-	rm -r "${WRK_DIR}"
-	open "${INSTALL_DIR}"
 
 ####库联合编译
 
@@ -143,14 +115,20 @@ iOS开发中，我们经常自己写并且使用在了项目中的就是静态�
 
 ##CocoaPods
 
-大部分项目使用`subtree`就能解决依赖问题，但是需要被更多其他的事打扰，比如编译脚本的维护等。   
+大部分项目使用`subtree`就能解决依赖问题，但是项目越多越麻烦，比如编译脚本的维护等。   
 
 pod的优秀就不说了，它不仅包含`subtree`所有功能，不产生依赖，并且集成、更新都比较简单，可以自定义下载需要的文件路径，但是大部分项目并没有使用它做工程依赖。  
-我觉得`CocoaPods`是每个优秀的iOS程序员必须掌握的技能，所以使用pod的成本还是比较小的。  
+我觉得`CocoaPods`是每个优秀的iOS程序员必须掌握的技能，所以使用pod的成本应该是比较小的。  
 
-使用`CocoaPods`需要自己创建私有库，网上很多代码运行平台，如果不满足可以自己搭建如`GitLab`这样的开源的代码管理平台。  
+使用`CocoaPods`需要自己创建私有库，网上很多代码存放平台，如果不满足可以自己搭建如`GitLab`这样的开源的代码管理平台。  
 
-| 一个很大的项目内包括 |
+####参考文档 
+
+[CocoaPods建立私有仓库](http://blog.csdn.net/agdsdl/article/details/45218987)  
+[使用Cocoapods创建私有podspec](http://blog.wtlucky.com/blog/2015/02/26/create-private-podspec/)
+
+####大一点的项目
+| 一个很大的项目内的子项目 |
 | ----- |
 | A项目 |
 | B项目 |
@@ -166,8 +144,12 @@ pod的优秀就不说了，它不仅包含`subtree`所有功能，不产生依�
 | Common层 | 依赖的库 |
 
 
-将这个A项目也作为一个pod源，供主项目依赖，每次子项目完成一个功能，打一个tag，然后让主项目更新即可。    
+发布阶段，将这个A项目也作为一个pod库，供主项目依赖，每次子项目完成一次迭代，打一个tag，然后让主项目更新即可。    
 对于一个项目有多个模块，开发人员也比较多，推荐这种方式。  
 
-#其他
-做的这个总结可能有点乱，感谢提出建议。
+#结论
+
+文章的内容就是介绍了3种依赖方式。  
+我更偏向的依赖方式就是使用cocoaPods建立各种私有库。  
+以前我也不喜欢pod，感觉麻烦，直到考虑项目依赖的时候，才发现pod才是绝佳的工具。  
+推荐大家都使用起来。  
