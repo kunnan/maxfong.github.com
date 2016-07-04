@@ -27,9 +27,9 @@ published: true
 ```  
 
 ###实现方式的步骤  
-1. 获取服务接口的rspTime，计算成serverDate（`[NSDate dateWithTimeIntervalSince1970:[headDictionary[@"rspTime"] doubleValue]/1000]`）。
+1. 获取服务接口的rspTime，计算成serverDate（`[NSDate dateWithTimeIntervalSince1970:[headDictionary[@"rspTime"] doubleValue]/1000]`）。  
 2. 根据服务端的Date和当前设备时间生成timeInterval（`serverDate.timeIntervalSinceNow`）。  
-3. [MFSNetworkDate date]获取时间时，判断serverDate是否存在，存在则返回当前时间（`[NSDate dateWithTimeIntervalSinceNow:timeInterval];`），否则返回设备时间(`[NSDate dateWithTimeIntervalSinceNow:0];`)。
+3. [MFSNetworkDate date]获取时间时，判断serverDate是否存在，存在则返回当前时间（`[NSDate dateWithTimeIntervalSinceNow:timeInterval];`），否则返回设备时间(`[NSDate dateWithTimeIntervalSinceNow:0];`)。  
 
 ###时间扩展方法实现   
 ```
