@@ -82,9 +82,7 @@ int const kBPCrashWaitCount = 2;
 
 ```
 
-##使用方式  
-
-####启动
+##启动  
 ```
 //开启闪退保护
     [TCTBootingProtection startWihtClearBlock:^{
@@ -92,6 +90,7 @@ int const kBPCrashWaitCount = 2;
     }];
 ```
   
-####其他  
+##其他  
 1.某些库如hotfix加载脚本，需判断`[TCTBootingProtection launchClear]`才可加载脚本，否则做脚本清理的问题。  
+2.MFSBootingProtectionClearNotification的作用是供有单例的库做清理。  
 2.无法正确的知道crash问题，只能做一些清理。  
