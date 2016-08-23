@@ -13,22 +13,38 @@ published: true
 	@implementation NSURL (URLWithStringEncode)
 	
 	+ (void)load {
-	    static dispatch_once_t onceToken;
-	    dispatch_once(&onceToken, ^ {
-	        const char* className = class_getName([self class]);
-	        Class metaClass = objc_getMetaClass(className);
-	        
-	        Method oldMethod = class_getInstanceMethod(metaClass, @selector(URLWithString:));
-	        Method newMethod = class_getInstanceMethod(metaClass, @selector(p_URLWithString:));
-	        
-	        method_exchangeImplementations(oldMethod, newMethod);
-	    });
-	}
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^ {
+        const char* class_name = class_getName([self class]);
+        Class metaClass = objc_getMetaClass(class_name);
+        
+        SEL originalSelector = @selector(URLWithString:);
+        SEL newSelector = @selector(p_URLWithString:);
+
+        Method originalMethod = class_getInstanceMethod(metaClass, originalSelector);
+        Method newMethod = class_getInstanceMethod(metaClass, newSelector);
+        
+        BOOL methodAdded = class_addMethod([metaClass class],
+                                           originalSelector,
+                                           method_getImplementation(newMethod),
+                                           method_getTypeEncoding(newMethod));
+        
+        if (methodAdded) {
+            class_replaceMethod([metaClass class],
+                                newSelector,
+                                method_getImplementation(originalMethod),
+                                method_getTypeEncoding(originalMethod));
+        }
+        else {
+            method_exchangeImplementations(originalMethod, newMethod);
+        }
+      });
+    }
+
 	
 	+ (instancetype)p_URLWithString:(NSString *)URLString {
-	    NSString *result = (NSString *)CFBridgingRelease(CFURLCreateStringByReplacingPercentEscapesUsingEncoding(kCFAllocatorDefault, (CFStringRef)URLString, CFSTR(""), kCFStringEncodingUTF8));
-	    NSString *newURLString = [result stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-	    return [NSURL p_URLWithString:newURLString];
+		//TODO:...
+	    return [NSURL p_URLWithString:URLString];
 	}
 	
 	@end
