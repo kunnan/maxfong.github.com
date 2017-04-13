@@ -1,30 +1,49 @@
 ---
 layout: default
 ---
-
-<p class="meta">
-  {{ page.date | date: "%B %d, %Y" }} 
-  <a href="/">
-    <i class="home fa fa-home"></i>
-  </a>
-</p>
-<h1 class="title">{{ page.title }}</h1>
-
-<div id="post">
-  {{ content }}
+<section class="collection-head small geopattern" data-pattern-id="{{ page.title | truncate: 15, ''}}">
+<div class="container">
+  <div class="columns">
+    <div class="column three-fourths">
+      <div class="collection-title">
+        <h1 class="collection-header">{{ page.title }}</h1>
+        <div class="collection-info">
+          {% if page.date %}
+          <span class="meta-info">
+            <span class="octicon octicon-calendar"></span> {{ page.date | date: "%Y/%m/%d" }}
+          </span>
+          {% endif %}
+          {% for cat in page.categories %}
+          <span class="meta-info">
+            <span class="octicon octicon-file-directory"></span>
+            <a href="/categories/#{{ cat }}" title="{{ cat }}">{{ cat }}</a>
+          </span>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-<hr class="post-list__divider">
-<div id="related">
-  <h5>更多文章</h5>
-  <ul class="posts">
-    {% for post in site.related_posts limit:3 %}
-    <li>
-      <span>{{ post.date | date_to_string }} &raquo;</span> <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-  </ul>
-  <p></p>
+</section>
+<!-- / .banner -->
+<section class="container content">
+<div class="columns">
+  <div class="column three-fourths" >
+    <article class="article-content markdown-body">
+    {{ content }}
+    {% include article-footer.html %}
+    </article>
+    <div class="share">
+      {% include sns-share.html %}
+    </div>
+    <div class="comment">
+      {% include comments.html %}
+    </div>
+  </div>
+  <div class="column one-fourth">
+    {% include sidebar-search.html %}
+    {% include sidebar-post-nav.html %}
+  </div>
 </div>
-
-{% include duoshuo.html %}
+</section>
+<!-- /section.content -->
