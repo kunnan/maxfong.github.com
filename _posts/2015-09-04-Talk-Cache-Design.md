@@ -8,22 +8,22 @@ published: true
 
 >我们的应用都包含了大量的数据，使用缓存可以让应用程序更快速的响应数据展示、用户输入，使程序高效的运行；
 
-#前提
+# 前提
 随着项目功能变多变复杂，客户端的存储方式不再统一，功能各不相同；
 
-###存储方式
+### 存储方式
 1. 最常用的是NSUserDefaults
 2. 归档的对象需要遵守`NSCoding`协议，使用`NSKeyedArchiver`和`NSKeyedUnarchiver`来归档和解压
 3. 数据序列化成`NSData`，`writeToFile`存储至文件
 4. DataBase，如SQLite
 
-###功能
+### 功能
 1. 数据的时效性
 2. 数据安全性
 3. 数据的不同类型，存储形式不同
 4. 大量数据的效率
 
-###统一
+### 统一
 我觉得有必要统一存储方式，只开放一个类，这个类能满足所有的功能；
 
 1. 数据的生命周期
@@ -33,9 +33,9 @@ published: true
 5. 尽可能多的数据类型
 6. 效率更快，最好是键值对关系
 
-#开工
+# 开工
 
-###FileStorageObject
+### FileStorageObject
 
 	typedef NS_ENUM(NSUInteger, MFSFileStorageObjectTimeOutInterval) {
 	    MFSFileStorageObjectIntervalDefault,
@@ -78,7 +78,7 @@ published: true
 
 `FileStorageObject`实现了`<NSCoding>`协议，让这个对象可被序列化存储；  
 
-###FileStorage
+### FileStorage
 
 	#import "MFSFileStorageObject.h"
 	
@@ -127,7 +127,7 @@ published: true
 
 `+removeDefaultObjectsWithCompletionBlock:`和`+removeExpireObjects`是对整个数据目录进行操作，范围很广；
 
-###CacheManager
+### CacheManager
 
 	extern NSString * const MFSCacheManagerObject;
 	extern NSString * const MFSCacheManagerObjectKey;
@@ -180,7 +180,7 @@ published: true
 3. `-setObject:forKey:duration:`通过`duration`来控制数据的有效时间，单位是秒，如果传入负数，说明数据永久，只能通过Key使用`-removeObjectForKey:`移除，`-removeObjectsWithCompletionBlock:`无法移除；  
 4. 使用`-setObject:forKey:toDisk:`存储的对象可不进行文件存储，只存在内存中，他和GlobalManager的区别在于是否需要经过`FileStorageObject`转换，每次获取的都是新对象，修改对原缓存对象无影响；  
 
-###GlobalManager
+### GlobalManager
 
 	@interface MFSGlobalManager : NSObject
 	
@@ -199,7 +199,7 @@ published: true
 
 每个客户端都需要保存一些全局数据，一般的做法是创建一个单例对象来保存，`GlobalManager`就是这个作用，因为单纯的存储在内存中，一处修改，其他地方取值也会变化；  
 
-#后续
+# 后续
 本篇是本人已经设计出的一种Cache方式并具体介绍它已有哪些功能，可能有所欠缺，抛砖引玉；  
 `CacheManager`和`GlobalManager`包含的功能基本上满足了一个App的数据缓存系统，比如用户信息，可根据UserID设置suiteName，每个用户账号都有不同的数据空间，而最好不要对用户信息使用单例存储；  
 

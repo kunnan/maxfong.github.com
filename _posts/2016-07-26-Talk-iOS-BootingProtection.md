@@ -8,12 +8,12 @@ published: true
 
 >“如果某个实体表现出以下任何一种特性，它就具备自主性：自我修复、自我保护、自我维护、对目标的自我控制、自我改进。” —— 凯文·凯利
 
-##阅读  
+## 阅读  
 [iOS启动连续闪退保护方案](http://www.infoq.com/cn/articles/ios-booting-protection)
 
-##基于Time的实现方式  
+## 基于Time的实现方式  
 
-####H文件  
+#### H文件  
 ```
 #import <Foundation/Foundation.h>
 
@@ -39,7 +39,7 @@ extern NSString *const MFSBootingProtectionClearNotification;
 @end
 ```
 
-####M文件  
+#### M文件  
 ```
 NSString *const MFSBootingProtectionClearNotification = @"MFSBootingProtectionClearNotification";
 NSString *const kBPCrashCountKey = @"kCrashCountKey";
@@ -82,7 +82,7 @@ int const kBPCrashWaitCount = 2;
 
 ```
 
-##启动  
+## 启动  
 ```
 //开启闪退保护
     [TCTBootingProtection startWihtClearBlock:^{
@@ -90,7 +90,7 @@ int const kBPCrashWaitCount = 2;
     }];
 ```
   
-##其他  
+## 其他  
 1.某些库如hotfix加载脚本，需判断`[TCTBootingProtection launchClear]`才可加载脚本，否则做脚本清理的问题。  
 2.MFSBootingProtectionClearNotification的作用是供有单例的库做清理。  
 3.无法正确的知道crash问题，只能做一些清理。  
