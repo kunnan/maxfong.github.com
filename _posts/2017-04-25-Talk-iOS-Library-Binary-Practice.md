@@ -98,7 +98,7 @@ pod 'MFSIdentifier', 'x.x.x'
 ```
 
 #### 缺点  
-1. 维护2个仓库
+1. 需要额外维护一个公用SDK仓库
 2. 维护2个spec，源码仓库也需要升级
 3. 每次功能改动，需要打包并提交到公用SDK仓库
 
@@ -203,6 +203,12 @@ carthage build --no-skip-current
 > git下载的工程(或删掉`xcuserdata`)后运行`xcodebuild -list`可以发现不存在`Schemes`一项  
 > 勾选Shared后会在`.xcodeproj`创建xcshareddata目录，里面保存着`.xcscheme`  
 
+##### 局限性    
+1. 打成的动态Framework需要添加到工程`Embeddd Binaries`中，打包后的app内包含framework文件，影响包大小。  
+2. 使用Carthage生成的Framework，包含完整的类实现，如果依赖库过多影响整体包大小。  
+
+>区分架构打包后需要通过脚本控制设备和模拟器的库引用比较麻烦  
+
 [Carthage](https://github.com/Carthage/Carthage)  
 [Carthage的使用](https://www.baidu.com/s?wd=Carthage%E7%9A%84%E4%BD%BF%E7%94%A8)  
 
@@ -213,12 +219,56 @@ carthage build --no-skip-current
 sudo gem install cocoapods-packager  
 ```
 
+##### 局限性  
+不用的原因同Carthage，依赖过多会引起类冲突  
+
 [cocoapods-packager](https://github.com/CocoaPods/cocoapods-packager)  
 [cocoapods打包](https://www.baidu.com/s?wd=cocoapods%20packager)  
 
 >开源项目将podspec文件也放在仓库中，是为了支持cocoapods packager  
 
 ![](../assets/images/20170425/4BFCB3C1-36FB-4970-B48A-812A786FF2DF.png)  
+
+<span id = "shell"></span>
+#### Shell  
+
+工程原来使用的编译脚本就是shell，正好可以使用起来  
+
+```
+# 更新CocoaPods
+#pod update
+
+# 填写Framework的Target名称
+FMK_NAME=Target名称
+WORKSPACE_NAME=${FMK_NAME}
+SCHEME_NAME=${FMK_NAME}
+# Install dir will be the final output to the framework.
+# The following line create it in the root folder of the current project.
+INSTALL_DIR=Products/${FMK_NAME}.framework
+# Working dir will be deleted after the framework creation.
+WRK_DIR=build
+DEVICE_DIR=${WRK_DIR}/Release-iphoneos/${FMK_NAME}.framework
+SIMULATOR_DIR=${WRK_DIR}/Release-iphonesimulator/${FMK_NAME}.framework
+# project方式
+# xcodebuild -configuration "Release" -target "${FMK_NAME}" -sdk iphoneos clean build
+# xcodebuild -configuration "Release" -target "${FMK_NAME}" -sdk iphonesimulator clean build
+# workspace方式
+xcodebuild -workspace ${WORKSPACE_NAME}".xcworkspace" -configuration "Release" -scheme ${SCHEME_NAME} SYMROOT=$(PWD)/build -sdk iphoneos clean build
+xcodebuild -workspace ${WORKSPACE_NAME}".xcworkspace" -configuration "Release" -scheme ${SCHEME_NAME} SYMROOT=$(PWD)/build -sdk iphonesimulator clean build
+# Cleaning the oldest.
+if [ -d "${INSTALL_DIR}" ]
+then
+rm -rf "${INSTALL_DIR}"
+fi
+mkdir -p "${INSTALL_DIR}"
+cp -R "${DEVICE_DIR}/" "${INSTALL_DIR}/"
+# Uses the Lipo Tool to merge both binary files (i386 + armv6/armv7) into one Universal final product.
+lipo -create "${DEVICE_DIR}/${FMK_NAME}" "${SIMULATOR_DIR}/${FMK_NAME}" -output "${INSTALL_DIR}/${FMK_NAME}"
+rm -r "${WRK_DIR}"
+
+```   
+
+>使用这段脚本打出的Framework，不包含引用类，多个framework需相互依赖才可使用。  
 
 #### prepare_command  
 
@@ -266,60 +316,8 @@ sudo gem install cocoapods-packager
 
 [I have a pod, I have a carthage, En...](http://mp.weixin.qq.com/s/wV68OWGB3fiWc1hJW-o59g)   
 
-### 改版方案  
 
-#### Carthage  
-1. 打成的动态Framework需要添加到工程`Embeddd Binaries`中，打包后的app内包含framework文件，影响包大小。  
-2. 使用Carthage生成的Framework，包含完成的类实现，如果依赖库过多影响整体包大小。  
-
->区分架构打包后需要通过脚本控制设备和模拟器的库引用比较麻烦  
-
-#### cocoapods packager  
-
-不用的原因同Carthage，依赖过多会引起类冲突  
-
-<span id = "shell"></span>
-#### Shell  
-
-工程原来使用的编译脚本就是shell，正好可以使用起来  
-
-```
-# 更新CocoaPods
-#pod update
-
-# 填写Framework的Target名称
-FMK_NAME=Target名称
-WORKSPACE_NAME=${FMK_NAME}
-SCHEME_NAME=${FMK_NAME}
-# Install dir will be the final output to the framework.
-# The following line create it in the root folder of the current project.
-INSTALL_DIR=Products/${FMK_NAME}.framework
-# Working dir will be deleted after the framework creation.
-WRK_DIR=build
-DEVICE_DIR=${WRK_DIR}/Release-iphoneos/${FMK_NAME}.framework
-SIMULATOR_DIR=${WRK_DIR}/Release-iphonesimulator/${FMK_NAME}.framework
-# project方式
-# xcodebuild -configuration "Release" -target "${FMK_NAME}" -sdk iphoneos clean build
-# xcodebuild -configuration "Release" -target "${FMK_NAME}" -sdk iphonesimulator clean build
-# workspace方式
-xcodebuild -workspace ${WORKSPACE_NAME}".xcworkspace" -configuration "Release" -scheme ${SCHEME_NAME} SYMROOT=$(PWD)/build -sdk iphoneos clean build
-xcodebuild -workspace ${WORKSPACE_NAME}".xcworkspace" -configuration "Release" -scheme ${SCHEME_NAME} SYMROOT=$(PWD)/build -sdk iphonesimulator clean build
-# Cleaning the oldest.
-if [ -d "${INSTALL_DIR}" ]
-then
-rm -rf "${INSTALL_DIR}"
-fi
-mkdir -p "${INSTALL_DIR}"
-cp -R "${DEVICE_DIR}/" "${INSTALL_DIR}/"
-# Uses the Lipo Tool to merge both binary files (i386 + armv6/armv7) into one Universal final product.
-lipo -create "${DEVICE_DIR}/${FMK_NAME}" "${SIMULATOR_DIR}/${FMK_NAME}" -output "${INSTALL_DIR}/${FMK_NAME}"
-rm -r "${WRK_DIR}"
-
-```   
-
->使用这段脚本打出的Framework，不包含引用类，多个framework需相互依赖才可使用。  
-
-### 改版后的完整的流程  
+### 完整的流程  
 
 #### 工程创建   
 
@@ -431,7 +429,7 @@ pod 'iOSBinaryPractice', '1.0.0'
 ```
 {
   "name": "iOSBinaryPractice",
-  "version": "0.alpha",
+  "version": "0.1.alpha",
   "summary": "iOSBinaryPractice",
   "description": "iOS 组件二进制化方案 Demo",
   "homepage": "https://github.com/maxfong/iOS-Library-Binary-Practice",
@@ -444,7 +442,7 @@ pod 'iOSBinaryPractice', '1.0.0'
   },
   "source": {
     "git": "https://github.com/maxfong/iOS-Library-Binary-Practice.git",
-    "tag": "0.alpha"
+    "tag": "0.1.alpha"
   },
   "source_files": [
     "iOSBinaryPractice/*.{h,m}"
