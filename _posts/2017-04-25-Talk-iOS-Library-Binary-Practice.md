@@ -23,7 +23,7 @@ published: true
 创建了一个公用SDK仓库，专门放生成的Framework，spec文件内使用subspecs区分各个Framework。    
 
 #### 公用SDK仓库目录结构  
-![仓库目录](../assets/images/20170425/B1C2C3C4-1191-4007-910A-FF748792BF26.png)
+![](../assets/images/20170425/B1C2C3C4-1191-4007-910A-FF748792BF26.png)
 
 #### 公用SDK仓库spec统一管理  
 
@@ -153,7 +153,7 @@ end
 
 #### 仓库目录  
 提前将二进制文件编译好放在工程仓库的SDK目录内  
-![仓库目录](../assets/images/20170425/64ECA082-6CF6-4033-ADC2-8D0CC7FE17F0.png)
+![](../assets/images/20170425/64ECA082-6CF6-4033-ADC2-8D0CC7FE17F0.png)
 
 #### 使用方式  
 
@@ -317,19 +317,19 @@ rm -r "${WRK_DIR}"
 [I have a pod, I have a carthage, En...](http://mp.weixin.qq.com/s/wV68OWGB3fiWc1hJW-o59g)   
 
 
-### 完整的流程  
+## 完整的流程  
 
-#### 工程创建   
+### 工程创建   
 
 创建Cocoa Touch Framework，命名为`iOSBinaryPractice`  
-![命名](../assets/images/20170425/61351B1A-94ED-40D5-977B-D567441A3221.png)  
+![](../assets/images/20170425/61351B1A-94ED-40D5-977B-D567441A3221.png)  
 
 开启Shared
-![命名](../assets/images/20170425/F0D9CB7F-72E3-4FF2-A007-028E37E19FDF.png)  
+![](../assets/images/20170425/F0D9CB7F-72E3-4FF2-A007-028E37E19FDF.png)  
 
 
 设置`Mach-O`为`Static Library`，如果工程支持动态库，则不需要修改  
-![设置](../assets/images/20170425/55D72AC4-9421-4D82-ABA7-AAB6ADC13A74.png)
+![](../assets/images/20170425/55D72AC4-9421-4D82-ABA7-AAB6ADC13A74.png)
 
 添加`Podfile`并`pod update`  
 >这步是模拟支持依赖其他库，可以不需要
@@ -343,11 +343,11 @@ end
 ```
 
 添加功能类，引用依赖`MFSIdentifier`  
-![设置](../assets/images/20170425/53D2106D-74E3-4A2E-A7F2-BF42A9AE3DA5.png)  
+![](../assets/images/20170425/53D2106D-74E3-4A2E-A7F2-BF42A9AE3DA5.png)  
 
 创建`Example`引用`iOSBinaryPractice.framework`  
 >这步是测试`iOSBinaryPractice.framework`能否正常使用  
-![设置](../assets/images/20170425/B020B48F-D506-48EA-BD15-B828CBA9D54A.png)  
+![](../assets/images/20170425/B020B48F-D506-48EA-BD15-B828CBA9D54A.png)  
 
 更新`Podfile`  
 
@@ -364,16 +364,16 @@ end
 ```
 
 在`Example`调用，发现运行一切正常
-![设置](../assets/images/20170425/5E1706B0-3D85-4D56-85DD-62967781D921.png)  
+![](../assets/images/20170425/5E1706B0-3D85-4D56-85DD-62967781D921.png)  
 
-#### Shell创建   
+### Shell创建   
 工程目录创建`build_framework.sh`，内容为之前[shell](#shell)脚本    
 
 >如果仓库只要pod依赖，需要开启`#pod update`  
 >FMK_NAME=Target名称需要修改，直接使用${PROJECT_NAME}会有问题  
 >终端打开工程目录，执行`sh build_framework.sh`，查看是否生成了`Products`目录，并且`iOSBinaryPractice.framework`是否生成
 
-#### podspec创建提交  
+### podspec创建提交  
 
 创建podspec，测试并且提交cocoapods，最终的`iOSBinaryPractice.podspec.json`文件  
 >过程省略
@@ -407,7 +407,7 @@ end
 
 ```
 
-#### 使用方式  
+### 使用方式  
 在`podfile`中引用  
 
 ```
@@ -416,9 +416,9 @@ pod 'iOSBinaryPractice', '1.0.0'
 >`Installing iOSBinaryPractice 1.0.0`过程时间会长一点，是在编译  
 
 完成后查看Pods目录文件结构  
-![设置](../assets/images/20170425/B08684EC-E132-4435-82DC-F574E73F0764.png)  
+![](../assets/images/20170425/B08684EC-E132-4435-82DC-F574E73F0764.png)  
 
-#### 调试问题  
+### 调试问题  
 二进制化后的提高了工程编译速度，但是不可以调试，所以我们需要支持源码调试模式  
 
 创建`0.1.alpha`标签，规定`0.1.alpha`为调试版本，podspec内容  
@@ -454,7 +454,7 @@ pod 'iOSBinaryPractice', '1.0.0'
 }
 ```
 
-#### 源码模式  
+### 源码模式  
 在`podfile`中引用  
 
 ```
@@ -466,10 +466,10 @@ pod 'iOSBinaryPractice', '0.1.alpha'
 >参考文章之前的[清理](#clean)
 
 
-### 完整的代码
+## 完整的代码
 
 [iOS-Library-Binary-Practice](https://github.com/maxfong/iOS-Library-Binary-Practice)  
 
-### 后续  
+## 后续  
 使用这种方式将Xcode的build时间提前到了`pod update`阶段，使得开发时效率加快。  
 文章的很多细节没有表达出来，如果实践有问题可以留言。  
