@@ -16,7 +16,6 @@ published: true
 1. 分仓库管理  
 2. `podspec`宏管理  
 3. `prepare_command` + `Carthage/cocoapods packager/python/ruby` 
-4. 改版方案
 
 ### 分仓库管理  
 
