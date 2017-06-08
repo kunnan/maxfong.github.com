@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "QQMusic for Mac V4.2.3.3"
-date:   2017-03-25 00:00:00
+title:  "QQMusic for Mac V5.0.0.3"
+date:   2017-06-08 00:00:00
 categories: Mac
 published: true
 ---
@@ -11,8 +11,12 @@ published: true
 1.收听并下载高品质、无损品质的音乐    
 2.免费收听收费的音乐  
 
-# 修改  
-使用`Hopper Disassembler`修改几处即可  
+# 支持版本  
+v4.2.3.3  
+v5.0.0.3  
+
+# 修改  
+使用`Hopper Disassembler`修改以下  
 
 ```
 -[UrlAudioData currentSongRateType] ret 0
