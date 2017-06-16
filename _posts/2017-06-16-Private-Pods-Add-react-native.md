@@ -2,7 +2,7 @@
 layout: post
 title:  "私有Pods集成react-native库"
 date:   2017-06-16 00:00:00
-categories: iOS, react-native
+categories: iOS react-native
 published: true
 ---
 
