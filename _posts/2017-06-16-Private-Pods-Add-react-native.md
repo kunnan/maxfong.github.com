@@ -76,7 +76,7 @@ npm install -g react-native-cli
 
 ```
 "source": {
-	"git": "git@git.17usoft.com:wireless-clientapp/react-native.git",
+	"git": "git@git.hostxx.com:group/react-native.git",
 	"tag": "v0.44.3"
 },
 ```
