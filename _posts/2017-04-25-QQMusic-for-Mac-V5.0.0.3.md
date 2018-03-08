@@ -13,7 +13,8 @@ published: true
 
 # 支持版本  
 v4.2.3.3  
-v5.0.0.3  
+v5.0.0.3  
+v5.3.1.5  
 
 # 修改  
 使用`Hopper Disassembler`修改以下  
